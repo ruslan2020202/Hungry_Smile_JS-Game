@@ -1,1 +1,1 @@
-# Hungry-Smile---JS-Game
+# Hungry Smile JS Game
