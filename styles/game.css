@@ -19,8 +19,15 @@ body{
 .btn-smile{
     background: none;
     border: 0;
+    touch-action:manipulation;
+    
 }
 
 .click-text{
     color:darkgoldenrod
+}
+
+.main-name{
+    display: flex;
+    align-items: center;
 }

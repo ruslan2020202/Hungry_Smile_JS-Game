@@ -1,7 +1,8 @@
 const images = ['angel.png', 'grimasa.png', 'include.png', 'hungry.png', 'mat.png']
 
 const btnSmile = document.querySelector('.btn-smile')
-const smileImg = document.querySelector('.smileImg') 
+const smileImg = document.querySelector('.smileImg')
+const textGame = document.querySelector('.click-text')
 let num = 0
 let smileWidth = smileImg.clientWidth  = '160px'
 let smileHeigth = smileImg.clientHeight = '160px'
@@ -28,7 +29,7 @@ btnSmile.addEventListener('click', ()=>{
     
 })
 
-endTime = Number(String(Date.now()).slice(0, 10)) + 25
+endTime = Number(String(Date.now()).slice(0, 10)) + 10
 
 function updaterTime() {
     let currentTime = Number(String(Date.now()).slice(0, 10))
@@ -36,8 +37,30 @@ function updaterTime() {
     if (remainingTime <= 0) {
         clearInterval(timerInterval)
         if(num < 49){
-            alert('You lose!')
-            window.location.href = '../templates/index.html'
+            smileImg.src = '../images/bomba.png'
+            textGame.textContent = 'OOOPS!'
+            btnSmile.disabled = true
+            let numIncrese = 0
+            function increaseBomb(){
+                smileHeigth = `${parseInt(smileHeigth) + 2}px`
+                smileWidth = `${parseInt(smileWidth) + 2}px`
+                smileImg.style.width = smileWidth; 
+                smileImg.style.height = smileHeigth;
+                numIncrese++
+                console.log(numIncrese)
+                if(numIncrese===40){
+                    clearInterval(increase)
+                    smileImg.src = '../images/explosion.png'
+                    textGame.textContent = 'BOOM!'
+                    setTimeout(alertTime, 1000)
+                }
+            }
+            let increase = setInterval(increaseBomb, 100)
+            function alertTime(){
+                alert('You lose!')
+                window.location.href = '../templates/index.html'
+
+            }
         }
     } else {
         let minutes = Math.floor(remainingTime / 60)
