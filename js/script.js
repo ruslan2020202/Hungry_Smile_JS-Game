@@ -6,10 +6,15 @@ const textGame = document.querySelector('.click-text')
 let num = 0
 let smileWidth = smileImg.clientWidth  = '160px'
 let smileHeigth = smileImg.clientHeight = '160px'
-
 let timer = document.querySelector('.timer')
+const soundWin = document.getElementById('soundWin')
+const gameOver = document.getElementById('gameOver')
+const fitelSound = document.getElementById('fitelSound')
 
 btnSmile.addEventListener('click', ()=>{
+    let clickSound = document.getElementById('clickSound')
+    clickSound.currentTime = 0
+    clickSound.play()
     num = num + 1
     console.log(num)
     smileHeigth = `${parseInt(smileHeigth) + 2}px`
@@ -23,6 +28,7 @@ btnSmile.addEventListener('click', ()=>{
         smileWidth = '160px'
     }
     if(num === 49){
+        soundWin.play()
         alert('You win!')
         window.location.href = '../templates/index.html'
     }
@@ -42,6 +48,7 @@ function updaterTime() {
             btnSmile.disabled = true
             let numIncrese = 0
             function increaseBomb(){
+                fitelSound.play()
                 smileHeigth = `${parseInt(smileHeigth) + 2}px`
                 smileWidth = `${parseInt(smileWidth) + 2}px`
                 smileImg.style.width = smileWidth; 
@@ -57,6 +64,7 @@ function updaterTime() {
             }
             let increase = setInterval(increaseBomb, 100)
             function alertTime(){
+                gameOver.play()
                 alert('You lose!')
                 window.location.href = '../templates/index.html'
 
@@ -78,3 +86,4 @@ function updaterTime() {
 
 let timerInterval = setInterval(updaterTime, 1000)
 updaterTime()
+
